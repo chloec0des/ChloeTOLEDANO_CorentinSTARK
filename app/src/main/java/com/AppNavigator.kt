@@ -20,6 +20,7 @@ fun AppNavigator() {
         startDestination = "start"
     ) {
         composable("start") { StartScreen(navController) }
+
         composable("level") { LevelScreen(navController) }
         composable("game/{level}") { backStackEntry ->
             val levelIndex = backStackEntry.arguments?.getString("level")?.toIntOrNull() ?: 0

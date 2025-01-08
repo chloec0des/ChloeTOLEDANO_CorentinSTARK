@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845519919630",
+    "project_id": "mirroredlabyrinth-ac337",
+    "storage_bucket": "mirroredlabyrinth-ac337.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845519919630:android:5ea85710e57c52a1db3a5f",
+        "android_client_info": {
+          "package_name": "com.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLaq2CVok1PK1vT8FxVu-c9Toi6egtpiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
