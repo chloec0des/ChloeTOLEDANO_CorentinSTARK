@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.myapplication"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.storage)
+    implementation(libs.firebase.auth.ktx)
     kapt(libs.androidx.room.compiler) // Correct kapt dependency
 
     implementation("androidx.compose.ui:ui:1.5.2")
