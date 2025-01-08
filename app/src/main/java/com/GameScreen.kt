@@ -16,11 +16,11 @@ import kotlinx.coroutines.delay
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun GameScreen(levelIndex: Int, navController: NavHostController, context: Context) {
-    // Load the labyrinth matrix
+    // Load the labyrinth matrix from the image resource
     val labyrinth = remember { MapProcessor.convertImageToMatrix(context, R.drawable.level1) }
 
-    // Create the mirrored labyrinth by duplicating each row horizontally
-    val mirroredMatrix = remember { labyrinth.map { row -> row + row }.toTypedArray() }
+    // Set the user's starting position
+    var userPosition by remember { mutableStateOf(Pair(labyrinth.size - 2, labyrinth[0].size - 2)) } // Example: Bottom-right
 
     // State for toggling obstacles
     var showObstacle by remember { mutableStateOf(true) }
@@ -31,25 +31,17 @@ fun GameScreen(levelIndex: Int, navController: NavHostController, context: Conte
         }
     }
 
-    // Draw the labyrinth with mirrored screens and delimitation line
+    // Draw the labyrinth filling the entire screen
     Canvas(modifier = Modifier.fillMaxSize()) {
-        val rows = mirroredMatrix.size
-        val cols = mirroredMatrix[0].size
+        val rows = labyrinth.size
+        val cols = labyrinth[0].size
         val cellWidth = size.width / cols
         val cellHeight = size.height / rows
 
-        // Draw the mirrored maze grid
-        for (y in mirroredMatrix.indices) {
-            for (x in mirroredMatrix[y].indices) {
-                val color = when (mirroredMatrix[y][x]) {
-                    0 -> Color.White    // Pathway
-                    1 -> Color.Black    // Wall
-                    2 -> Color.Red      // Deadly obstacle
-                    3 -> if (showObstacle) Color.Blue else Color.Transparent // Appearing/disappearing obstacle
-                    in 100..255 -> Color.Green // Portals
-                    else -> Color.Gray
-                }
-
+        // Draw the labyrinth grid
+        for (y in labyrinth.indices) {
+            for (x in labyrinth[y].indices) {
+                val color = getColorForCell(labyrinth[y][x], showObstacle)
                 drawRect(
                     color = color,
                     topLeft = androidx.compose.ui.geometry.Offset(x * cellWidth, y * cellHeight),
@@ -59,13 +51,26 @@ fun GameScreen(levelIndex: Int, navController: NavHostController, context: Conte
             }
         }
 
-        // Draw the orange line (delimitation) at the center
-        val delimiterX = (cols / 2) * cellWidth
-        drawLine(
-            color = Color(0xFFFFA500), // Orange color
-            start = androidx.compose.ui.geometry.Offset(delimiterX, 0f),
-            end = androidx.compose.ui.geometry.Offset(delimiterX, size.height),
-            strokeWidth = 4f
+        // Draw the user's position as a yellow ball
+        drawCircle(
+            color = Color.Yellow,
+            center = androidx.compose.ui.geometry.Offset(
+                (userPosition.second + 0.5f) * cellWidth,
+                (userPosition.first + 0.5f) * cellHeight
+            ),
+            radius = cellWidth / 2 // Ball fits into the cell
         )
+    }
+}
+
+// Helper function to determine the color of each cell
+private fun getColorForCell(cellValue: Int, showObstacle: Boolean): Color {
+    return when (cellValue) {
+        0 -> Color.White    // Pathway
+        1 -> Color.Black    // Wall
+        2 -> Color.Red      // Deadly obstacle
+        3 -> if (showObstacle) Color.Blue else Color.Transparent // Appearing obstacle
+        in 100..255 -> Color.Green // Portals
+        else -> Color.Gray
     }
 }

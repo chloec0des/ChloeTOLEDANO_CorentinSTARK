@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.platform.LocalContext
 import com.example.myapplication.GameScreen
 
-
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun AppNavigator() {
@@ -23,9 +22,12 @@ fun AppNavigator() {
         composable("start") { StartScreen(navController) }
         composable("level") { LevelScreen(navController) }
         composable("game/{level}") { backStackEntry ->
-            val levelIndex = backStackEntry.arguments?.getString("level")?.toInt() ?: 0
-            GameScreen(levelIndex = levelIndex, navController = navController, context = LocalContext.current)
+            val levelIndex = backStackEntry.arguments?.getString("level")?.toIntOrNull() ?: 0
+            GameScreen(
+                levelIndex = levelIndex,
+                navController = navController,
+                context = LocalContext.current
+            )
         }
-
     }
 }
