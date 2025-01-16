@@ -4,7 +4,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Fill
@@ -41,12 +40,8 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Labyrinth canvas
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxSize()
-        ) {
+        // Canvas to draw the labyrinth
+        Box(modifier = Modifier.weight(1f)) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 val rows = labyrinth.size
                 val cols = labyrinth[0].size
@@ -101,10 +96,30 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            ControlButton("⬆", onClick = { moveBall("up", labyrinth, bottomBallPosition) { bottomBallPosition = it } })
-            ControlButton("⬇", onClick = { moveBall("down", labyrinth, bottomBallPosition) { bottomBallPosition = it } })
-            ControlButton("⬅", onClick = { moveBall("left", labyrinth, bottomBallPosition) { bottomBallPosition = it } })
-            ControlButton("➡", onClick = { moveBall("right", labyrinth, bottomBallPosition) { bottomBallPosition = it } })
+            ControlButton("⬆") {
+                moveBothBalls("up", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                    topBallPosition = top
+                    bottomBallPosition = bottom
+                }
+            }
+            ControlButton("⬇") {
+                moveBothBalls("down", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                    topBallPosition = top
+                    bottomBallPosition = bottom
+                }
+            }
+            ControlButton("⬅") {
+                moveBothBalls("left", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                    topBallPosition = top
+                    bottomBallPosition = bottom
+                }
+            }
+            ControlButton("➡") {
+                moveBothBalls("right", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                    topBallPosition = top
+                    bottomBallPosition = bottom
+                }
+            }
         }
     }
 }
@@ -120,20 +135,30 @@ fun ControlButton(direction: String, onClick: () -> Unit) {
     }
 }
 
-// Function to move the ball
-private fun moveBall(
+// Function to move both balls
+private fun moveBothBalls(
     direction: String,
     labyrinth: Array<Array<Int>>,
-    currentPosition: Pair<Int, Int>,
-    updatePosition: (Pair<Int, Int>) -> Unit
+    topPosition: Pair<Int, Int>,
+    bottomPosition: Pair<Int, Int>,
+    updatePositions: (Pair<Int, Int>, Pair<Int, Int>) -> Unit
 ) {
-    val (x, y) = currentPosition
-    val newPosition = when (direction) {
-        "up" -> Pair(x - 1, y).takeIf { x > 0 && labyrinth[x - 1][y] == 0 }
-        "down" -> Pair(x + 1, y).takeIf { x < labyrinth.size - 1 && labyrinth[x + 1][y] == 0 }
-        "left" -> Pair(x, y - 1).takeIf { y > 0 && labyrinth[x][y - 1] == 0 }
-        "right" -> Pair(x, y + 1).takeIf { y < labyrinth[0].size - 1 && labyrinth[x][y + 1] == 0 }
+    val topNewPosition = when (direction) {
+        "up" -> Pair(topPosition.first - 1, topPosition.second).takeIf { topPosition.first > 0 && labyrinth[topPosition.first - 1][topPosition.second] == 0 }
+        "down" -> Pair(topPosition.first + 1, topPosition.second).takeIf { topPosition.first < labyrinth.size - 1 && labyrinth[topPosition.first + 1][topPosition.second] == 0 }
+        "left" -> Pair(topPosition.first, topPosition.second + 1).takeIf { topPosition.second < labyrinth[0].size - 1 && labyrinth[topPosition.first][topPosition.second + 1] == 0 } // Inverted left-right
+        "right" -> Pair(topPosition.first, topPosition.second - 1).takeIf { topPosition.second > 0 && labyrinth[topPosition.first][topPosition.second - 1] == 0 } // Inverted left-right
         else -> null
-    }
-    newPosition?.let { updatePosition(it) }
+    } ?: topPosition
+
+    val bottomNewPosition = when (direction) {
+        "up" -> Pair(bottomPosition.first - 1, bottomPosition.second).takeIf { bottomPosition.first > 0 && labyrinth[bottomPosition.first - 1][bottomPosition.second] == 0 }
+        "down" -> Pair(bottomPosition.first + 1, bottomPosition.second).takeIf { bottomPosition.first < labyrinth.size - 1 && labyrinth[bottomPosition.first + 1][bottomPosition.second] == 0 }
+        "left" -> Pair(bottomPosition.first, bottomPosition.second - 1).takeIf { bottomPosition.second > 0 && labyrinth[bottomPosition.first][bottomPosition.second - 1] == 0 }
+        "right" -> Pair(bottomPosition.first, bottomPosition.second + 1).takeIf { bottomPosition.second < labyrinth[0].size - 1 && labyrinth[bottomPosition.first][bottomPosition.second + 1] == 0 }
+        else -> null
+    } ?: bottomPosition
+
+    updatePositions(topNewPosition, bottomNewPosition)
 }
+
