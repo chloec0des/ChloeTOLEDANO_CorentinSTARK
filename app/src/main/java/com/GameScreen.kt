@@ -97,25 +97,25 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             ControlButton("⬆") {
-                moveBothBalls("up", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                moveUntilEnd("up", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
                     topBallPosition = top
                     bottomBallPosition = bottom
                 }
             }
             ControlButton("⬇") {
-                moveBothBalls("down", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                moveUntilEnd("down", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
                     topBallPosition = top
                     bottomBallPosition = bottom
                 }
             }
             ControlButton("⬅") {
-                moveBothBalls("left", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                moveUntilEnd("left", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
                     topBallPosition = top
                     bottomBallPosition = bottom
                 }
             }
             ControlButton("➡") {
-                moveBothBalls("right", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
+                moveUntilEnd("right", labyrinth, topBallPosition, bottomBallPosition) { top, bottom ->
                     topBallPosition = top
                     bottomBallPosition = bottom
                 }
@@ -135,30 +135,37 @@ fun ControlButton(direction: String, onClick: () -> Unit) {
     }
 }
 
-// Function to move both balls
-private fun moveBothBalls(
+// Function to move the balls until the end of the path in the selected direction
+private fun moveUntilEnd(
     direction: String,
     labyrinth: Array<Array<Int>>,
     topPosition: Pair<Int, Int>,
     bottomPosition: Pair<Int, Int>,
     updatePositions: (Pair<Int, Int>, Pair<Int, Int>) -> Unit
 ) {
-    val topNewPosition = when (direction) {
-        "up" -> Pair(topPosition.first - 1, topPosition.second).takeIf { topPosition.first > 0 && labyrinth[topPosition.first - 1][topPosition.second] == 0 }
-        "down" -> Pair(topPosition.first + 1, topPosition.second).takeIf { topPosition.first < labyrinth.size - 1 && labyrinth[topPosition.first + 1][topPosition.second] == 0 }
-        "left" -> Pair(topPosition.first, topPosition.second + 1).takeIf { topPosition.second < labyrinth[0].size - 1 && labyrinth[topPosition.first][topPosition.second + 1] == 0 } // Inverted left-right
-        "right" -> Pair(topPosition.first, topPosition.second - 1).takeIf { topPosition.second > 0 && labyrinth[topPosition.first][topPosition.second - 1] == 0 } // Inverted left-right
-        else -> null
-    } ?: topPosition
+    var topX = topPosition.first
+    var topY = topPosition.second
+    var bottomX = bottomPosition.first
+    var bottomY = bottomPosition.second
 
-    val bottomNewPosition = when (direction) {
-        "up" -> Pair(bottomPosition.first - 1, bottomPosition.second).takeIf { bottomPosition.first > 0 && labyrinth[bottomPosition.first - 1][bottomPosition.second] == 0 }
-        "down" -> Pair(bottomPosition.first + 1, bottomPosition.second).takeIf { bottomPosition.first < labyrinth.size - 1 && labyrinth[bottomPosition.first + 1][bottomPosition.second] == 0 }
-        "left" -> Pair(bottomPosition.first, bottomPosition.second - 1).takeIf { bottomPosition.second > 0 && labyrinth[bottomPosition.first][bottomPosition.second - 1] == 0 }
-        "right" -> Pair(bottomPosition.first, bottomPosition.second + 1).takeIf { bottomPosition.second < labyrinth[0].size - 1 && labyrinth[bottomPosition.first][bottomPosition.second + 1] == 0 }
-        else -> null
-    } ?: bottomPosition
+    when (direction) {
+        "up" -> {
+            while (topX > 0 && labyrinth[topX - 1][topY] == 0) topX--
+            while (bottomX > 0 && labyrinth[bottomX - 1][bottomY] == 0) bottomX--
+        }
+        "down" -> {
+            while (topX < labyrinth.size - 1 && labyrinth[topX + 1][topY] == 0) topX++
+            while (bottomX < labyrinth.size - 1 && labyrinth[bottomX + 1][bottomY] == 0) bottomX++
+        }
+        "left" -> {
+            while (topY < labyrinth[0].size - 1 && labyrinth[topX][topY + 1] == 0) topY++ // Inverted for top
+            while (bottomY > 0 && labyrinth[bottomX][bottomY - 1] == 0) bottomY--
+        }
+        "right" -> {
+            while (topY > 0 && labyrinth[topX][topY - 1] == 0) topY-- // Inverted for top
+            while (bottomY < labyrinth[0].size - 1 && labyrinth[bottomX][bottomY + 1] == 0) bottomY++
+        }
+    }
 
-    updatePositions(topNewPosition, bottomNewPosition)
+    updatePositions(Pair(topX, topY), Pair(bottomX, bottomY))
 }
-
