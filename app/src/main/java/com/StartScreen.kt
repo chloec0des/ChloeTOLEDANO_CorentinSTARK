@@ -14,11 +14,8 @@ fun StartScreen(navController: NavHostController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(
-            onClick = { navController.navigate("home") }, // Navigate to the login/sign-in screen
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Start")
+        Button(onClick = { navController.navigate("level") }) {
+            Text("Start Game")
         }
     }
 }
