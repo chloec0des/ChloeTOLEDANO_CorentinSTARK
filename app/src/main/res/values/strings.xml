@@ -1,4 +1,5 @@
 <resources>
+    <string name="default_web_client_id">101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com</string>
     <string name="app_name">Mirrored Labyrinth</string>
     <string name="select_language">Select Language</string>
     <string name="french">French</string>

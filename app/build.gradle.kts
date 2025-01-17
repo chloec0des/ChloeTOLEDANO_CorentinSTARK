@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.kapt) // Correctly apply kapt plugin
+    alias(libs.plugins.kotlin.kapt)
     id("com.google.gms.google-services")
 }
 
@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.storage)
     implementation(libs.firebase.auth.ktx)
-    kapt(libs.androidx.room.compiler) // Correct kapt dependency
+    kapt(libs.androidx.room.compiler)
 
     implementation("androidx.compose.ui:ui:1.5.2")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
@@ -64,12 +64,13 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.android.gms:play-services-auth:20.5.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
-    // Debugging tools
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.2")
 
-    // Navigation dependency
     implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)

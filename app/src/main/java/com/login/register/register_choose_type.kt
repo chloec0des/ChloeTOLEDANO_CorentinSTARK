@@ -13,7 +13,6 @@ import com.example.myapplication.R
 @Composable
 fun RegisterChooseType(
     onAppRegisterClicked: () -> Unit,
-    onGoogleRegisterClicked: () -> Unit,
     onMetaRegisterClicked: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -30,11 +29,6 @@ fun RegisterChooseType(
 
         Button(onClick = onAppRegisterClicked) {
             Text(text = stringResource(id = R.string.game_account))
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Button(onClick = onGoogleRegisterClicked) {
-            Text(text = stringResource(id = R.string.google_account))
         }
         Spacer(modifier = Modifier.height(8.dp))
 
