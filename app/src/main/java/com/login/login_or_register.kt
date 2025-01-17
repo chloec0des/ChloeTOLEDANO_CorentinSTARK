@@ -2,7 +2,6 @@ package com.login
 
 import android.app.Activity
 import android.os.Build
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.LanguageManager
 import com.example.myapplication.R
-import java.util.Locale
 
 @Composable
 fun LoginOrRegister(
@@ -36,7 +34,8 @@ fun LoginOrRegister(
     val languageButtonText = when (currentLang) {
         "en" -> "English"
         "fr" -> "Français"
-        else -> "Language"
+        "es" -> "Español"
+        else -> "Il faut mettre à jour login or register !"
     }
 
     val topColor = Color(0xFF7C1CDC)

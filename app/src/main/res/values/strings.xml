@@ -1,9 +1,10 @@
 <resources>
-    <string name="default_web_client_id">101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com</string>
-    <string name="app_name">Mirrored Labyrinth</string>
+    <string name="default_web_client_id" translatable="false">101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com</string>
+    <string name="app_name" translatable="false">Mirrored Labyrinth</string>
     <string name="select_language">Select Language</string>
-    <string name="french">French</string>
-    <string name="english">English</string>
+    <string name="french" translatable="false">Français</string>
+    <string name="english" translatable="false">English</string>
+    <string name="spanish" translatable="false">Español</string>
     <string name="new_account">New account</string>
     <string name="login">Login</string>
     <string name="change_password">Change Password</string>
@@ -19,4 +20,7 @@
     <string name="create_account">Create account</string>
     <string name="back">Back</string>
     <string name="validate">Validate</string>
+    <string name="passwords_mismatch">Passwords do not match</string>
+    <string name="register_success">Account created successfully</string>
+    <string name="register_failed">Account creation failed</string>
 </resources>

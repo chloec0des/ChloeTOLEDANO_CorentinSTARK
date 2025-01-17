@@ -1,8 +1,5 @@
 <resources>
-    <string name="app_name">Mirrored Labyrinth</string>
     <string name="select_language">Sélectionner la langue</string>
-    <string name="french">Français</string>
-    <string name="english">Anglais</string>
     <string name="new_account">Nouveau compte</string>
     <string name="login">Connexion</string>
     <string name="change_password">Changer le mot de passe</string>
@@ -18,4 +15,7 @@
     <string name="create_account">Créer un compte</string>
     <string name="back">Retour</string>
     <string name="validate">Valider</string>
+    <string name="passwords_mismatch">Les mots de passe ne correspondent pas</string>
+    <string name="register_success">Compte créé avec succès</string>
+    <string name="register_failed">La création du compte a échoué</string>
 </resources>

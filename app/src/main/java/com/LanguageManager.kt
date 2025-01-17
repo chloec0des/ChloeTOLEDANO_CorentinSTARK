@@ -20,6 +20,10 @@ object LanguageManager {
             return
         }
         if (currentLanguage == "fr") {
+            setLocale(context, "es")
+            return
+        }
+        if (currentLanguage == "es") {
             setLocale(context, "en")
             return
         }
