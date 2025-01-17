@@ -1,7 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="select_language">Seleccionar idioma</string>
     <string name="new_account">Nueva cuenta</string>
     <string name="login">Iniciar sesión</string>
+    <string name="login_success">Inicio de sesión exitoso</string>
+    <string name="login_failed">Error al iniciar sesión</string>
+    <string name="login_failed_empty_fields">Por favor, complete todos los campos</string>
     <string name="change_password">Cambiar la contraseña</string>
     <string name="forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="email">Correo electrónico</string>
@@ -12,10 +16,13 @@
     <string name="meta_account">Cuenta de Meta</string>
     <string name="game_account">Cuenta de Juego</string>
     <string name="already_have_account">¿Ya tienes una cuenta?</string>
-    <string name="create_account">Crear una cuenta</string>
+    <string name="create_account">Crear cuenta</string>
     <string name="back">Atrás</string>
     <string name="validate">Validar</string>
     <string name="passwords_mismatch">Las contraseñas no coinciden</string>
     <string name="register_success">Cuenta creada con éxito</string>
     <string name="register_failed">La creación de la cuenta falló</string>
+    <string name="register_failed_empty_fields">Por favor, complete todos los campos</string>
+    <string name="register_failed_invalid_email">Correo electrónico no válido</string>
+    <string name="register_failed_password_too_short">La contraseña es demasiado corta</string>
 </resources>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="default_web_client_id" translatable="false">101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com</string>
     <string name="app_name" translatable="false">Mirrored Labyrinth</string>
@@ -7,6 +8,9 @@
     <string name="spanish" translatable="false">Español</string>
     <string name="new_account">New account</string>
     <string name="login">Login</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="login_failed_empty_fields">Please fill in all the fields</string>
     <string name="change_password">Change Password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="email">Email</string>
@@ -23,4 +27,7 @@
     <string name="passwords_mismatch">Passwords do not match</string>
     <string name="register_success">Account created successfully</string>
     <string name="register_failed">Account creation failed</string>
+    <string name="register_failed_empty_fields">Please fill in all the fields</string>
+    <string name="register_failed_invalid_email">Invalid email address</string>
+    <string name="register_failed_password_too_short">Password is too short</string>
 </resources>

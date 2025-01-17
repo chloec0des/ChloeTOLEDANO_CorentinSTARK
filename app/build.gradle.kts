@@ -16,7 +16,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,13 +28,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
@@ -52,7 +54,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.storage)
-    implementation(libs.firebase.auth.ktx)
     kapt(libs.androidx.room.compiler)
 
     implementation("androidx.compose.ui:ui:1.5.2")
@@ -65,12 +66,13 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
+
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth-ktx")
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.2")
-
     implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
@@ -78,6 +80,4 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-    implementation("com.google.firebase:firebase-analytics")
 }
