@@ -23,17 +23,13 @@ fun WinScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Celebration graphic
         Image(
-            painter = painterResource(id = R.drawable.trophy), // Add a trophy or celebration icon in your resources
+            painter = painterResource(id = R.drawable.trophy),
             contentDescription = "Win Trophy",
             modifier = Modifier.size(200.dp),
             colorFilter = ColorFilter.tint(androidx.compose.ui.graphics.Color.Yellow)
         )
-
         Spacer(modifier = Modifier.height(32.dp))
-
-        // Win message
         Text(
             text = "Congratulations!",
             fontSize = 32.sp,
@@ -45,22 +41,12 @@ fun WinScreen(navController: NavHostController) {
             fontSize = 18.sp,
             modifier = Modifier.padding(top = 8.dp)
         )
-
         Spacer(modifier = Modifier.height(32.dp))
-
-        // Navigation buttons
         Button(
-            onClick = { navController.navigate("level") } // Navigate back to level selection
+            onClick = { navController.navigate("level") }
         ) {
             Text(text = "Choose Another Level")
         }
-
         Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = { navController.navigate("start") } // Navigate back to home/start
-        ) {
-            Text(text = "Return to Home")
-        }
     }
 }

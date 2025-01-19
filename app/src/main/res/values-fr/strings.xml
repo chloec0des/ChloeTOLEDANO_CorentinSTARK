@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_language">Sélectionner la langue</string>
+    <string name="new_account">Nouveau compte</string>
+    <string name="login">Connexion</string>
+    <string name="login_success">Connexion réussie</string>
+    <string name="login_failed">Échec de la connexion</string>
+    <string name="login_failed_empty_fields">Veuillez remplir tous les champs</string>
+    <string name="change_password">Changer le mot de passe</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="confirm">Confirmer</string>
+    <string name="google_account">Compte Google</string>
+    <string name="playgames_account">Compte Play jeux</string>
+    <string name="game_account">Compte Jeu</string>
+    <string name="already_have_account">Vous avez déjà un compte ?</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="back">Retour</string>
+    <string name="validate">Valider</string>
+    <string name="passwords_mismatch">Les mots de passe ne correspondent pas</string>
+    <string name="register_success">Compte créé avec succès</string>
+    <string name="register_failed">La création du compte a échoué</string>
+    <string name="register_failed_empty_fields">Veuillez remplir tous les champs</string>
+    <string name="register_failed_invalid_email">Adresse e-mail invalide</string>
+    <string name="register_failed_password_too_short">Le mot de passe est trop court</string>
+    <string name="playgames">Play Jeu</string>
+</resources>
