@@ -61,7 +61,7 @@ fun RegisterChooseType(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = stringResource(id = R.string.meta_account),
+                    text = stringResource(id = R.string.playgames_account),
                     color = Color.Black
                 )
             }

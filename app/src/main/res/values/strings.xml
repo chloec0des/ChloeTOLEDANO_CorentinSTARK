@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">YOUR_FIREBASE_WEB_CLIENT_ID</string>
     <string name="app_name" translatable="false">Mirrored Labyrinth</string>
     <string name="select_language">Select Language</string>
     <string name="french" translatable="false">Français</string>
@@ -18,7 +18,7 @@
     <string name="pseudo">Username</string>
     <string name="confirm">Confirm</string>
     <string name="google_account">Google account</string>
-    <string name="meta_account">Meta account</string>
+    <string name="playgames_account">Play Games account</string>
     <string name="game_account">Game account</string>
     <string name="already_have_account">Already have an account?</string>
     <string name="create_account">Create account</string>
@@ -30,4 +30,5 @@
     <string name="register_failed_empty_fields">Please fill in all the fields</string>
     <string name="register_failed_invalid_email">Invalid email address</string>
     <string name="register_failed_password_too_short">Password is too short</string>
+    <string name="playgames">Play Games</string>
 </resources>

@@ -28,7 +28,7 @@ fun RegisterMeta(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = stringResource(id = R.string.meta_account))
+        Text(text = stringResource(id = R.string.playgames_account))
 
         Spacer(modifier = Modifier.height(16.dp))
 

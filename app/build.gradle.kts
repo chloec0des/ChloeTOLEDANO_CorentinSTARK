@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.storage)
     kapt(libs.androidx.room.compiler)
-
     implementation("androidx.compose.ui:ui:1.5.2")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
     implementation("androidx.compose.foundation:foundation:1.5.2")
@@ -66,18 +65,19 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
-
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx")
-
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.2")
     implementation(libs.androidx.navigation.compose)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation (platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation ("com.google.firebase:firebase-auth-ktx")
+
 }

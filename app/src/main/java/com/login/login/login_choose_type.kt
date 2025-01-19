@@ -3,7 +3,11 @@ package com.login.login
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +21,7 @@ import com.example.myapplication.R
 fun LoginChooseType(
     onAppAccountClicked: () -> Unit,
     onGoogleAccountClicked: () -> Unit,
-    onMetaAccountClicked: () -> Unit,
+    onPlayGamesAccountClicked: () -> Unit,
     onBack: () -> Unit
 ) {
     val topColor = Color(0xFF7C1CDC)
@@ -25,14 +29,10 @@ fun LoginChooseType(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(listOf(topColor, bottomColor))
-            )
+            .background(Brush.verticalGradient(listOf(topColor, bottomColor)))
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
+            modifier = Modifier.fillMaxSize().padding(24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -61,12 +61,12 @@ fun LoginChooseType(
             }
             Spacer(modifier = Modifier.height(8.dp))
             Button(
-                onClick = onMetaAccountClicked,
+                onClick = onPlayGamesAccountClicked,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White)
             ) {
-                Text(text = stringResource(id = R.string.meta_account), color = Color.Black)
+                Text(text = stringResource(id = R.string.playgames_account), color = Color.Black)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(

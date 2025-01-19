@@ -65,7 +65,7 @@ class LoginClass {
                 LoginChooseType(
                     onAppAccountClicked = { goToLoginGameAccount() },
                     onGoogleAccountClicked = { goToLoginGoogle() },
-                    onMetaAccountClicked = { goToLoginMeta() },
+                    onPlayGamesAccountClicked = { goToLoginMeta() },
                     onBack = { goToFirstPage() }
                 )
             }
@@ -88,7 +88,7 @@ class LoginClass {
             }
 
             LoginScreen.LoginMeta -> {
-                LoginMeta(
+                LoginPlayGames(
                     onLoginSuccess = { goToFirstPage() },
                     onBack = { goBackToLoginChooseType() }
                 )
