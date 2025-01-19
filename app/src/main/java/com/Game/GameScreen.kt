@@ -5,67 +5,62 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerInputScope
-import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import kotlinx.coroutines.delay
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import com.Game.animateMovement
+import com.Game.detectHorizontalAndVerticalSwipes
 import kotlinx.coroutines.launch
+import com.Game.findWall
+import com.Game.loadLevelFromImage
+import com.Game.moveOneStep
 
-suspend fun PointerInputScope.detectHorizontalAndVerticalSwipes(
-    onSwipeUp: () -> Unit,
-    onSwipeDown: () -> Unit,
-    onSwipeLeft: () -> Unit,
-    onSwipeRight: () -> Unit
-) {
-    val swipeThreshold = 20f
-    awaitPointerEventScope {
-        while (true) {
-            val event = awaitPointerEvent()
-            val changes = event.changes.firstOrNull()
-            val dragAmount = changes?.positionChange()
+@Composable
+fun GameScreen(navController: NavHostController, levelIndex: Int) {
+    val context = LocalContext.current
+    val labyrinth = remember { mutableStateOf<Array<Array<Int>>?>(null) }
+    val topStartPosition = remember { mutableStateOf<Pair<Int, Int>?>(null) }
+    val bottomStartPosition = remember { mutableStateOf<Pair<Int, Int>?>(null) }
 
-            if (dragAmount != null) {
-                when {
-                    dragAmount.y < -swipeThreshold -> {
-                        onSwipeUp()
-                        changes.consume()
-                    }
-                    dragAmount.y > swipeThreshold -> {
-                        onSwipeDown()
-                        changes.consume()
-                    }
-                    dragAmount.x < -swipeThreshold -> {
-                        onSwipeLeft()
-                        changes.consume()
-                    }
-                    dragAmount.x > swipeThreshold -> {
-                        onSwipeRight()
-                        changes.consume()
-                    }
-                }
-            }
+    LaunchedEffect(levelIndex) {
+        val result = loadLevelFromImage(context, levelIndex)
+        if (result != null) {
+            labyrinth.value = result.first
+            topStartPosition.value = result.second
+            bottomStartPosition.value = result.third
+        }
+    }
+
+    if (labyrinth.value != null && topStartPosition.value != null && bottomStartPosition.value != null) {
+        GameContent(
+            navController = navController,
+            labyrinth = labyrinth.value!!,
+            topStartPosition = topStartPosition.value!!,
+            bottomStartPosition = bottomStartPosition.value!!
+        )
+    } else {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Text(
+                text = "Failed to load the level.",
+                fontSize = 20.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.Center)
+            )
         }
     }
 }
 
 @Composable
-fun GameScreen(navController: NavHostController, levelIndex: Int) {
-    val labyrinth = arrayOf(
-        arrayOf(1, 1, 1, 1, 1, 1, 1, 1, 1),
-        arrayOf(1, 0, 0, 0, 1, 0, 0, 0, 1),
-        arrayOf(1, 0, 1, 0, 1, 0, 1, 0, 1),
-        arrayOf(1, 0, 1, 0, 0, 0, 1, 0, 1),
-        arrayOf(1, 0, 1, 1, 1, 1, 1, 0, 1),
-        arrayOf(1, 0, 0, 0, 1, 0, 0, 0, 1),
-        arrayOf(1, 1, 1, 0, 1, 0, 1, 1, 1),
-        arrayOf(1, 0, 0, 0, 0, 0, 0, 0, 1),
-        arrayOf(1, 1, 1, 1, 1, 1, 1, 1, 1)
-    )
-
-    val topStartPosition = Pair(1, 1)
-    val bottomStartPosition = Pair(7, 7)
-
+fun GameContent(
+    navController: NavHostController,
+    labyrinth: Array<Array<Int>>,
+    topStartPosition: Pair<Int, Int>,
+    bottomStartPosition: Pair<Int, Int>
+) {
     var topBallPosition by remember { mutableStateOf(topStartPosition) }
     var bottomBallPosition by remember { mutableStateOf(bottomStartPosition) }
     var targetTopPosition by remember { mutableStateOf(topStartPosition) }
@@ -205,47 +200,5 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
                 radius = cellWidth / 2
             )
         }
-    }
-}
-
-suspend fun animateMovement(
-    start: Pair<Int, Int>,
-    end: Pair<Int, Int>,
-    onPositionUpdate: (Float, Float) -> Unit
-) {
-    val duration = 50
-    val steps = 20
-    val stepDuration = duration / steps
-
-    val dx = (end.second - start.second).toFloat() / steps
-    val dy = (end.first - start.first).toFloat() / steps
-
-    repeat(steps) {
-        onPositionUpdate(it * dx, it * dy)
-        delay(stepDuration.toLong())
-    }
-    onPositionUpdate(0f, 0f)
-}
-
-private fun findWall(direction: String, labyrinth: Array<Array<Int>>, position: Pair<Int, Int>): Pair<Int, Int> {
-    var (x, y) = position
-    when (direction) {
-        "up" -> while (x > 0 && labyrinth[x - 1][y] == 0) x--
-        "down" -> while (x < labyrinth.size - 1 && labyrinth[x + 1][y] == 0) x++
-        "left" -> while (y > 0 && labyrinth[x][y - 1] == 0) y--
-        "right" -> while (y < labyrinth[0].size - 1 && labyrinth[x][y + 1] == 0) y++
-    }
-    return Pair(x, y)
-}
-
-private fun moveOneStep(current: Pair<Int, Int>, target: Pair<Int, Int>): Pair<Int, Int> {
-    val (currentX, currentY) = current
-    val (targetX, targetY) = target
-    return when {
-        currentX < targetX -> Pair(currentX + 1, currentY)
-        currentX > targetX -> Pair(currentX - 1, currentY)
-        currentY < targetY -> Pair(currentX, currentY + 1)
-        currentY > targetY -> Pair(currentX, currentY - 1)
-        else -> current
     }
 }

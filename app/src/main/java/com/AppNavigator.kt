@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -161,9 +162,10 @@ fun AppNavigator() {
         composable("profile") { ProfileScreen() }
         composable("game/{level}") { backStackEntry ->
             val levelIndex = backStackEntry.arguments?.getString("level")?.toIntOrNull() ?: 0
+            val context = LocalContext.current
             GameScreen(
                 navController = navController,
-                levelIndex = levelIndex
+                levelIndex = levelIndex,
             )
         }
         composable("win") { WinScreen(navController) }
