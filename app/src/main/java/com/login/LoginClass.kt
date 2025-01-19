@@ -1,8 +1,15 @@
 package com.login
 
 import androidx.compose.runtime.*
-import com.login.login.*
-import com.login.register.*
+import androidx.navigation.NavHostController
+import com.login.login.LoginChooseType
+import com.login.login.LoginGameAccount
+import com.login.login.LoginGoogle
+import com.login.login.LoginPlayGames
+import com.login.login.ChangePassword
+import com.login.register.RegisterChooseType
+import com.login.register.RegisterGameAccount
+import com.login.register.RegisterMeta
 
 class LoginClass {
     var currentScreen by mutableStateOf<LoginScreen>(LoginScreen.FirstPage)
@@ -35,15 +42,14 @@ class LoginClass {
         currentScreen = LoginScreen.ChangePassword
     }
 
-    // Register : choix du type
     fun goToRegisterGameAccount() {
         currentScreen = LoginScreen.RegisterGameAccount
     }
+
     fun goToRegisterMeta() {
         currentScreen = LoginScreen.RegisterMeta
     }
 
-    // Retour sur un écran antérieur
     fun goBackToLoginChooseType() {
         currentScreen = LoginScreen.LoginChooseType
     }
@@ -52,8 +58,12 @@ class LoginClass {
         currentScreen = LoginScreen.RegisterChooseType
     }
 
+    fun goToLevelScreen() {
+        currentScreen = LoginScreen.LevelScreen
+    }
+
     @Composable
-    fun RenderUI() {
+    fun RenderUI(onLevelScreen: NavHostController) {
         when (currentScreen) {
             LoginScreen.FirstPage -> {
                 LoginOrRegister(
@@ -69,43 +79,31 @@ class LoginClass {
                     onBack = { goToFirstPage() }
                 )
             }
-
             LoginScreen.LoginGameAccount -> {
                 LoginGameAccount(
-                    onLoginSuccess = {
-                        goToFirstPage()
-                    },
+                    onLoginSuccess = { goToLevelScreen() },
                     onForgotPasswordClicked = { goToForgotPassword() },
                     onBack = { goBackToLoginChooseType() }
                 )
             }
-
             LoginScreen.LoginGoogle -> {
                 LoginGoogle(
-                    onLoginSuccess = { goToFirstPage() },
+                    onLoginSuccess = { goToLevelScreen() },
                     onBack = { goBackToLoginChooseType() }
                 )
             }
-
             LoginScreen.LoginMeta -> {
                 LoginPlayGames(
-                    onLoginSuccess = { goToFirstPage() },
+                    onLoginSuccess = { goToLevelScreen() },
                     onBack = { goBackToLoginChooseType() }
                 )
             }
-
             LoginScreen.ChangePassword -> {
                 ChangePassword(
-                    onValidate = {
-                        goBackToLoginChooseType()
-                    },
-                    onBack = {
-                        goBackToLoginChooseType()
-                    }
+                    onValidate = { goBackToLoginChooseType() },
+                    onBack = { goBackToLoginChooseType() }
                 )
             }
-
-            // 2) Ecrans de Register
             LoginScreen.RegisterChooseType -> {
                 RegisterChooseType(
                     onAppRegisterClicked = { goToRegisterGameAccount() },
@@ -113,21 +111,20 @@ class LoginClass {
                     onBack = { goToFirstPage() }
                 )
             }
-
             LoginScreen.RegisterGameAccount -> {
                 RegisterGameAccount(
-                    onRegisterSuccess = {
-                        goToFirstPage()
-                    },
+                    onRegisterSuccess = { goToLevelScreen() },
                     onBack = { goBackToRegisterChooseType() }
                 )
             }
-
             LoginScreen.RegisterMeta -> {
                 RegisterMeta(
-                    onRegisterSuccess = { goToFirstPage() },
+                    onRegisterSuccess = { goToLevelScreen() },
                     onBack = { goBackToRegisterChooseType() }
                 )
+            }
+            LoginScreen.LevelScreen -> {
+                onLevelScreen
             }
         }
     }
@@ -135,16 +132,13 @@ class LoginClass {
 
 sealed class LoginScreen {
     object FirstPage : LoginScreen()
-
-    // Login
     object LoginChooseType : LoginScreen()
     object LoginGameAccount : LoginScreen()
     object LoginGoogle : LoginScreen()
     object LoginMeta : LoginScreen()
     object ChangePassword : LoginScreen()
-
-    // Register
     object RegisterChooseType : LoginScreen()
     object RegisterGameAccount : LoginScreen()
     object RegisterMeta : LoginScreen()
+    object LevelScreen : LoginScreen()
 }
