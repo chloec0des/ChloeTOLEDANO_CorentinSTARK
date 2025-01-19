@@ -60,13 +60,13 @@ suspend fun animateMovement(
     onPositionUpdate(0f, 0f)
 }
 
-fun findWall(direction: String, labyrinth: Array<Array<Int>>, position: Pair<Int, Int>): Pair<Int, Int> {
+fun findWall(direction: String, labyrinth: Array<Array<GameObject>>, position: Pair<Int, Int>): Pair<Int, Int> {
     var (x, y) = position
     when (direction) {
-        "up" -> while (x > 0 && labyrinth[x - 1][y] == 0) x--
-        "down" -> while (x < labyrinth.size - 1 && labyrinth[x + 1][y] == 0) x++
-        "left" -> while (y > 0 && labyrinth[x][y - 1] == 0) y--
-        "right" -> while (y < labyrinth[0].size - 1 && labyrinth[x][y + 1] == 0) y++
+        "up" -> while (x > 0 && labyrinth[x - 1][y] == VoidArea) x--
+        "down" -> while (x < labyrinth.size - 1 && labyrinth[x + 1][y] == VoidArea) x++
+        "left" -> while (y > 0 && labyrinth[x][y - 1] == VoidArea) y--
+        "right" -> while (y < labyrinth[0].size - 1 && labyrinth[x][y + 1] == VoidArea) y++
     }
     return Pair(x, y)
 }

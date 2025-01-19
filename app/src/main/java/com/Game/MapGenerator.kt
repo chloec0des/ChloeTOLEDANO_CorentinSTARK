@@ -8,60 +8,60 @@ import android.util.Log
 fun loadLevelFromImage(
     context: Context,
     levelNumber: Int
-): Triple<Array<Array<Int>>, Pair<Int, Int>, Pair<Int, Int>>? {
+): Array<Array<GameObject>> {
     try {
         val imageName = "level$levelNumber.png"
-        Log.d("MapGenerator", "Attempting to open asset: $imageName")
         val assetManager = context.assets
         val inputStream = assetManager.open(imageName)
         val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
         inputStream.close()
-        if (bitmap == null) {
-            Log.e("MapGenerator", "Bitmap is null for image: $imageName")
-            return null
-        }
-        Log.d("MapGenerator", "Bitmap loaded: width=${bitmap.width}, height=${bitmap.height}")
+
         val width = bitmap.width
         val height = bitmap.height
-        if (width == 0 || height == 0) {
-            Log.e("MapGenerator", "Invalid dimensions for \"$imageName\": width=$width, height=$height.")
-            return null
-        }
-        val labyrinth = Array(height) { Array(width) { 0 } }
-        var topPosition: Pair<Int, Int>? = null
-        var bottomPosition: Pair<Int, Int>? = null
+        val labyrinth = Array(height) { Array(width) { VoidArea as GameObject } }
+
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val pixel = bitmap.getPixel(x, y)
                 val r = (pixel shr 16) and 0xFF
                 val g = (pixel shr 8) and 0xFF
                 val b = pixel and 0xFF
-                when {
-                    r == 0 && g == 0 && b == 0 -> labyrinth[y][x] = 1
-                    r == 237 && g == 28 && b == 36 -> {
-                        topPosition = Pair(y, x)
-                        labyrinth[y][x] = 0
-                    }
-                    r == 63 && g == 72 && b == 204 -> {
-                        bottomPosition = Pair(y, x)
-                        labyrinth[y][x] = 0
-                    }
-                    else -> labyrinth[y][x] = 0
+
+                labyrinth[y][x] = when {
+                    r == 0 && g == 0 && b == 0 -> Wall
+                    r == 237 && g == 28 && b == 36 -> Player(mirror = true)
+                    r == 63 && g == 72 && b == 204 -> Player(mirror = false)
+                    r == 255 && g == 127 && b == 39 -> Mirror
+                    else -> VoidArea
                 }
             }
         }
-        if (topPosition == null) {
-            Log.e("MapGenerator", "Top position not found in \"$imageName\".")
-            return null
-        }
-        if (bottomPosition == null) {
-            Log.e("MapGenerator", "Bottom position not found in \"$imageName\".")
-            return null
-        }
-        Log.d("MapGenerator", "Level loaded successfully: top=$topPosition, bottom=$bottomPosition")
-        return Triple(labyrinth, topPosition, bottomPosition)
+
+        return labyrinth
     } catch (e: Exception) {
         Log.e("MapGenerator", "Error loading level $levelNumber: ${e.message}", e)
-        return null
+        throw e
     }
+}
+
+fun findPlayer(labyrinth: Array<Array<GameObject>>): Pair<Int, Int>? {
+    for (y in labyrinth.indices) {
+        for (x in labyrinth[y].indices) {
+            if (labyrinth[y][x] is Player && !(labyrinth[y][x] as Player).mirror) {
+                return Pair(y, x)
+            }
+        }
+    }
+    return null
+}
+
+fun findMirrorPlayer(labyrinth: Array<Array<GameObject>>): Pair<Int, Int>? {
+    for (y in labyrinth.indices) {
+        for (x in labyrinth[y].indices) {
+            if (labyrinth[y][x] is Player && (labyrinth[y][x] as Player).mirror) {
+                return Pair(y, x)
+            }
+        }
+    }
+    return null
 }

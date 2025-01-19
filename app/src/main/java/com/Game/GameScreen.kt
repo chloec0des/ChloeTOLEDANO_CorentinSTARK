@@ -12,27 +12,35 @@ import androidx.navigation.NavHostController
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import com.Game.GameObject
+import com.Game.Mirror
 import com.Game.animateMovement
 import com.Game.detectHorizontalAndVerticalSwipes
 import kotlinx.coroutines.launch
 import com.Game.findWall
 import com.Game.loadLevelFromImage
 import com.Game.moveOneStep
+import com.Game.VoidArea
+import com.Game.Wall
+import com.Game.findMirrorPlayer
+import com.Game.findPlayer
 
 @Composable
 fun GameScreen(navController: NavHostController, levelIndex: Int) {
     val context = LocalContext.current
-    val labyrinth = remember { mutableStateOf<Array<Array<Int>>?>(null) }
+    val labyrinth = remember { mutableStateOf<Array<Array<GameObject>>?>(null) }
     val topStartPosition = remember { mutableStateOf<Pair<Int, Int>?>(null) }
     val bottomStartPosition = remember { mutableStateOf<Pair<Int, Int>?>(null) }
-
     LaunchedEffect(levelIndex) {
         val result = loadLevelFromImage(context, levelIndex)
-        if (result != null) {
-            labyrinth.value = result.first
-            topStartPosition.value = result.second
-            bottomStartPosition.value = result.third
-        }
+        val updatedLabyrinth = result.map { it.copyOf() }.toTypedArray()
+        val topPosition = findMirrorPlayer(result)
+        val bottomPosition = findPlayer(result)
+        topPosition?.let { (y, x) -> updatedLabyrinth[y][x] = VoidArea }
+        bottomPosition?.let { (y, x) -> updatedLabyrinth[y][x] = VoidArea }
+        labyrinth.value = updatedLabyrinth
+        topStartPosition.value = topPosition
+        bottomStartPosition.value = bottomPosition
     }
 
     if (labyrinth.value != null && topStartPosition.value != null && bottomStartPosition.value != null) {
@@ -54,10 +62,11 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
     }
 }
 
+
 @Composable
 fun GameContent(
     navController: NavHostController,
-    labyrinth: Array<Array<Int>>,
+    labyrinth: Array<Array<GameObject>>,
     topStartPosition: Pair<Int, Int>,
     bottomStartPosition: Pair<Int, Int>
 ) {
@@ -167,8 +176,9 @@ fun GameContent(
             for (y in labyrinth.indices) {
                 for (x in labyrinth[y].indices) {
                     val color = when (labyrinth[y][x]) {
-                        0 -> Color(0xFFDBB2FF)
-                        1 -> Color.Black
+                        VoidArea -> Color(0xFFC8A2FF)
+                        Wall -> Color.Black
+                        Mirror -> Color(0xFFFFFF)
                         else -> Color.Gray
                     }
                     drawRect(
