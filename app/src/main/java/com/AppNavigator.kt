@@ -2,19 +2,17 @@ package com
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.GameScreen
 import com.example.myapplication.WinScreen
+import com.login.LoginOrRegister
 import com.login.login.LoginChooseType
 import com.login.login.LoginGameAccount
 import com.login.login.LoginGoogle
@@ -78,14 +76,10 @@ fun AppNavigator() {
         composable("auth") {
             when (currentScreen) {
                 LoginState.FirstPage -> {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Button(onClick = { goToLogin() }) { Text("Se connecter") }
-                        Button(onClick = { goToRegister() }) { Text("S'inscrire") }
-                    }
+                    LoginOrRegister(
+                        onRegisterClicked = { goToRegister() },
+                        onLoginClicked = { goToLogin() }
+                    )
                 }
                 LoginState.LoginChooseType -> {
                     LoginChooseType(
