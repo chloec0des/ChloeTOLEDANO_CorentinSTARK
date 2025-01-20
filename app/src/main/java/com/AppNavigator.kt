@@ -11,8 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.GameScreen
-import com.example.myapplication.WinScreen
+import com.Game.GameScreen
+import com.WinScreen
 import com.login.LoginOrRegister
 import com.login.login.LoginChooseType
 import com.login.login.LoginGameAccount

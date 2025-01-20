@@ -10,7 +10,7 @@ suspend fun PointerInputScope.detectHorizontalAndVerticalSwipes(
     onSwipeLeft: () -> Unit,
     onSwipeRight: () -> Unit
 ) {
-    val swipeThreshold = 50f // Adjust the threshold as needed
+    val swipeThreshold = 20f // Adjust the threshold as needed
     awaitPointerEventScope {
         while (true) {
             val event = awaitPointerEvent()
