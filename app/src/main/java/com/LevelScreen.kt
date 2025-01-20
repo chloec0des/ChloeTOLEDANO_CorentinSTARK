@@ -66,7 +66,7 @@ fun LevelScreen(navController: NavHostController) {
             )
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                onClick = { navController.navigate("game/0") },
+                onClick = { navController.navigate("game/1") },
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                 modifier = Modifier.width(200.dp)
@@ -75,7 +75,7 @@ fun LevelScreen(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { navController.navigate("game/1") },
+                onClick = { navController.navigate("game/2") },
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                 modifier = Modifier.width(200.dp)
