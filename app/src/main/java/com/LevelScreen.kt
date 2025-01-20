@@ -74,7 +74,7 @@ fun LevelScreen(navController: NavHostController) {
             ) {
                 Text(stringResource(id = R.string.level_name, 1), color = Color.Black)
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Button(
                 onClick = { navController.navigate("game/2") },
                 shape = RoundedCornerShape(14.dp),
@@ -83,6 +83,34 @@ fun LevelScreen(navController: NavHostController) {
             ) {
                 Text(stringResource(id = R.string.level_name, 2), color = Color.Black)
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { navController.navigate("game/3") },
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                modifier = Modifier.width(200.dp)
+            ) {
+                Text(stringResource(id = R.string.level_name, 3), color = Color.Black)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { navController.navigate("game/4") },
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                modifier = Modifier.width(200.dp)
+            ) {
+                Text(stringResource(id = R.string.level_name, 4), color = Color.Black)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { navController.navigate("game/5") },
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                modifier = Modifier.width(200.dp)
+            ) {
+                Text(stringResource(id = R.string.level_name, 5), color = Color.Black)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

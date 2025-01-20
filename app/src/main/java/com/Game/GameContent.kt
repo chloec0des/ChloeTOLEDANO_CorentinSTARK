@@ -4,16 +4,12 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 
@@ -40,7 +36,9 @@ fun GameContent(
         labyrinth = labyrinth,
         topBallPosition = derivedStateOf { topBallPosition },
         bottomBallPosition = derivedStateOf { bottomBallPosition },
-        navController = navController
+        navController = navController,
+        topMoving = topMoving,
+        bottomMoving = bottomMoving
     )
 
     LaunchedEffect(targetTopPosition) {
@@ -172,9 +170,12 @@ fun startWinChecker(
     labyrinth: Array<Array<GameObject>>,
     topBallPosition: State<Pair<Int, Int>>,
     bottomBallPosition: State<Pair<Int, Int>>,
-    navController: NavHostController
+    navController: NavHostController,
+    topMoving: State<Boolean>,
+    bottomMoving: State<Boolean>
 ) {
-    var showPopup by remember { mutableStateOf(false) }
+    var showPositionPopup by remember { mutableStateOf(false) }
+    var mirrorTestPopup by remember { mutableStateOf(false) }
     var topValues by remember { mutableStateOf(Pair(0, 0)) }
     var bottomValues by remember { mutableStateOf(Pair(0, 0)) }
 
@@ -182,21 +183,18 @@ fun startWinChecker(
         while (true) {
             topValues = topBallPosition.value
             bottomValues = bottomBallPosition.value
+
             delay(50)
-
-
             val (xTop, yTop) = topValues
             val (xBottom, yBottom) = bottomValues
-            if (yTop == xBottom && kotlin.math.abs(xTop - xBottom) == 2) {
-                showPopup = true
-                val middleX = (xTop + xBottom) / 2
-                val middleY = yTop
-                if (labyrinth[middleX][middleY] is Mirror) {
-                    navController.navigate("win")
-                    break
-                }
+            val middleX = (xTop + xBottom) / 2
+            val middleY = yTop
+            if (yTop == yBottom && kotlin.math.abs(xTop - xBottom) == 2 &&
+                !bottomMoving.value && !topMoving.value && labyrinth[middleX][middleY] is Mirror
+            ) {
+                navController.navigate("win")
+                break
             }
         }
     }
 }
-
