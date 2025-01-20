@@ -26,4 +26,12 @@
     <string name="register_failed_invalid_email">Adresse e-mail invalide</string>
     <string name="register_failed_password_too_short">Le mot de passe est trop court</string>
     <string name="playgames">Play Jeu</string>
+    <string name="win_trophy_description">Trophée de victoire</string>
+    <string name="congratulations">Félicitations !</string>
+    <string name="level_completed">Vous avez terminé le niveau avec succès !</string>
+    <string name="choose_another_level">Choisir un autre niveau</string>
+    <string name="disconnect">Se déconnecter</string>
+    <string name="choose_your_level">Choisissez votre niveau</string>
+    <string name="level_name">Niveau %1$d</string>
+    <string name="failed_to_load_level">Échec du chargement du niveau.</string>
 </resources>

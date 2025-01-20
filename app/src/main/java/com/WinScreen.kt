@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,19 +27,19 @@ fun WinScreen(navController: NavHostController) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.trophy),
-            contentDescription = "Win Trophy",
+            contentDescription = stringResource(id = R.string.win_trophy_description),
             modifier = Modifier.size(200.dp),
             colorFilter = ColorFilter.tint(androidx.compose.ui.graphics.Color.Yellow)
         )
         Spacer(modifier = Modifier.height(32.dp))
         Text(
-            text = "Congratulations!",
+            text = stringResource(id = R.string.congratulations),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = androidx.compose.ui.graphics.Color.Green
         )
         Text(
-            text = "You've successfully completed the level!",
+            text = stringResource(id = R.string.level_completed),
             fontSize = 18.sp,
             modifier = Modifier.padding(top = 8.dp)
         )
@@ -46,7 +47,7 @@ fun WinScreen(navController: NavHostController) {
         Button(
             onClick = { navController.navigate("level") }
         ) {
-            Text(text = "Choose Another Level")
+            Text(text = stringResource(id = R.string.choose_another_level))
         }
         Spacer(modifier = Modifier.height(16.dp))
     }
