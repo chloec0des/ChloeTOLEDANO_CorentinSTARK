@@ -13,8 +13,8 @@
     <string name="pseudo">Apodo</string>
     <string name="confirm">Confirmar</string>
     <string name="google_account">Cuenta de Google</string>
-    <string name="game_account">Cuenta de Juego</string>
     <string name="playgames_account">Cuenta de Play Juegos</string>
+    <string name="game_account">Cuenta de Juego</string>
     <string name="already_have_account">¿Ya tienes una cuenta?</string>
     <string name="create_account">Crear cuenta</string>
     <string name="back">Atrás</string>
@@ -26,4 +26,12 @@
     <string name="register_failed_invalid_email">Correo electrónico no válido</string>
     <string name="register_failed_password_too_short">La contraseña es demasiado corta</string>
     <string name="playgames">Play Juegos</string>
+    <string name="win_trophy_description">Trofeo de victoria</string>
+    <string name="congratulations">¡Felicidades!</string>
+    <string name="level_completed">¡Has completado el nivel con éxito!</string>
+    <string name="choose_another_level">Elegir otro nivel</string>
+    <string name="disconnect">Desconectar</string>
+    <string name="choose_your_level">Elige tu nivel</string>
+    <string name="level_name">Nivel %1$d</string>
+    <string name="failed_to_load_level">Error al cargar el nivel.</string>
 </resources>

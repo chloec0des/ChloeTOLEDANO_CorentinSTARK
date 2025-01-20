@@ -31,4 +31,12 @@
     <string name="register_failed_invalid_email">Invalid email address</string>
     <string name="register_failed_password_too_short">Password is too short</string>
     <string name="playgames">Play Games</string>
+    <string name="win_trophy_description">Win Trophy</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="level_completed">You have successfully completed the level!</string>
+    <string name="choose_another_level">Choose Another Level</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="choose_your_level">Choose Your Level</string>
+    <string name="level_name">Level %1$d</string>
+    <string name="failed_to_load_level">Failed to load the level.</string>
 </resources>

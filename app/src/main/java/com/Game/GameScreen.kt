@@ -7,9 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
+import com.example.myapplication.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -45,7 +47,7 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
             Text(
-                text = "Failed to load the level.",
+                text = stringResource(id = R.string.failed_to_load_level),
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.align(Alignment.Center)
@@ -53,7 +55,3 @@ fun GameScreen(navController: NavHostController, levelIndex: Int) {
         }
     }
 }
-
-
-
-
