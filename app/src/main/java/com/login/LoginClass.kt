@@ -6,7 +6,7 @@ import com.login.login.LoginChooseType
 import com.login.login.LoginGameAccount
 import com.login.login.LoginGoogle
 import com.login.login.LoginPlayGames
-import com.login.login.ChangePassword
+import com.login.login.ResetPassword
 import com.login.register.RegisterChooseType
 import com.login.register.RegisterGameAccount
 import com.login.register.RegisterMeta
@@ -99,8 +99,8 @@ class LoginClass {
                 )
             }
             LoginScreen.ChangePassword -> {
-                ChangePassword(
-                    onValidate = { goBackToLoginChooseType() },
+                ResetPassword (
+                    onSuccess = { goBackToLoginChooseType() },
                     onBack = { goBackToLoginChooseType() }
                 )
             }

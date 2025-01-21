@@ -39,4 +39,10 @@
     <string name="choose_your_level">Choose Your Level</string>
     <string name="level_name">Level %1$d</string>
     <string name="failed_to_load_level">Failed to load the level.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="send_reset_email">Send Reset Email</string>
+    <string name="reset_email_sent">Reset email sent successfully!</string>
+    <string name="reset_failed">Failed to send reset email.</string>
+    <string name="email_not_found">Email not associated with an account.</string>
+    <string name="enter_email">Please enter your email address.</string>
 </resources>
