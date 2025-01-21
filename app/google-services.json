@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "845519919630",
-    "project_id": "mirroredlabyrinth-ac337",
-    "storage_bucket": "mirroredlabyrinth-ac337.firebasestorage.app"
+    "project_number": "101144348363",
+    "project_id": "mirrored-maze",
+    "storage_bucket": "mirrored-maze.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:845519919630:android:5ea85710e57c52a1db3a5f",
+        "mobilesdk_app_id": "1:101144348363:android:467e71319413217b713d4e",
         "android_client_info": {
           "package_name": "com.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "101144348363-s2qgr7jek8cqtm09c75rtpgqcgh085ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapplication",
+            "certificate_hash": "572782376223d66ed34f2b8aeb6eefc797b53400"
+          }
+        },
+        {
+          "client_id": "101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDLaq2CVok1PK1vT8FxVu-c9Toi6egtpiU"
+          "current_key": "AIzaSyAyWfgyAY8FKowcNc9k6tCdyXNn8Cd7_gY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101144348363-ock17s4ki6sq9rs7h4ckdmbpoqvtfo7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -34,4 +34,10 @@
     <string name="choose_your_level">Elige tu nivel</string>
     <string name="level_name">Nivel %1$d</string>
     <string name="failed_to_load_level">Error al cargar el nivel.</string>
+    <string name="reset_password">Restablecer Contraseña</string>
+    <string name="send_reset_email">Enviar Correo de Restablecimiento</string>
+    <string name="reset_email_sent">¡Correo de restablecimiento enviado con éxito!</string>
+    <string name="reset_failed">Error al enviar el correo de restablecimiento.</string>
+    <string name="email_not_found">El correo no está asociado a una cuenta.</string>
+    <string name="enter_email">Por favor, introduce tu dirección de correo.</string>
 </resources>

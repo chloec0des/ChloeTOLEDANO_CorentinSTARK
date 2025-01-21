@@ -3,22 +3,17 @@ package com
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.Game.GameScreen
-import com.WinScreen
 import com.login.LoginOrRegister
 import com.login.login.LoginChooseType
 import com.login.login.LoginGameAccount
 import com.login.login.LoginGoogle
 import com.login.login.LoginPlayGames
-import com.login.login.ChangePassword
+import com.login.login.ResetPassword
 import com.login.register.RegisterChooseType
 import com.login.register.RegisterGameAccount
 import com.login.register.RegisterMeta
@@ -122,8 +117,8 @@ fun AppNavigator() {
                     )
                 }
                 LoginState.ChangePassword -> {
-                    ChangePassword(
-                        onValidate = { goBackToLoginChooseType() },
+                    ResetPassword (
+                        onSuccess = { goBackToLoginChooseType() },
                         onBack = { goBackToLoginChooseType() }
                     )
                 }

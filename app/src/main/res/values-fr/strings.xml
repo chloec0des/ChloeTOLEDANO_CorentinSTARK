@@ -34,4 +34,10 @@
     <string name="choose_your_level">Choisissez votre niveau</string>
     <string name="level_name">Niveau %1$d</string>
     <string name="failed_to_load_level">Échec du chargement du niveau.</string>
+    <string name="reset_password">Réinitialiser le mot de passe</string>
+    <string name="send_reset_email">Envoyer l\'e-mail de réinitialisation</string>
+    <string name="reset_email_sent">E-mail de réinitialisation envoyé avec succès !</string>
+    <string name="reset_failed">Échec de l\'envoi de l\'e-mail de réinitialisation.</string>
+    <string name="email_not_found">L\'adresse e-mail n\'est associée à aucun compte.</string>
+    <string name="enter_email">Veuillez entrer votre adresse e-mail.</string>
 </resources>
